@@ -1,0 +1,248 @@
+.tache-element {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+    padding: 16px;
+    transition: all 0.3s ease;
+    border-left: 4px solid #ddd;
+}
+
+.tache-element:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.tache-element.terminee {
+    opacity: 0.7;
+    background-color: #f9f9f9;
+}
+
+.tache-element.en-retard {
+    border-left-color: #f44336;
+}
+
+/* En-tête */
+.tache-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+/* Case à cocher */
+.tache-checkbox {
+    flex-shrink: 0;
+}
+
+.checkbox-input {
+    display: none;
+}
+
+.checkbox-label {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.checkbox-label:hover {
+    border-color: #3f51b5;
+}
+
+.checkbox-input:checked+.checkbox-label {
+    background-color: #3f51b5;
+    border-color: #3f51b5;
+}
+
+.checkbox-input:checked+.checkbox-label .checkmark {
+    display: block;
+}
+
+.checkmark {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+    mask-size: contain;
+}
+
+/* Contenu */
+.tache-content {
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.tache-titre {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.tache-element.terminee .tache-titre {
+    color: #666;
+}
+
+.tache-titre.barre {
+    text-decoration: line-through;
+    color: #666;
+}
+
+.tache-description {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.tache-element.terminee .tache-description {
+    opacity: 0.7;
+}
+
+/* Priorité */
+.tache-priorite {
+    flex-shrink: 0;
+}
+
+.badge-priorite {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.priorite-1 {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.priorite-2 {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.priorite-3 {
+    background-color: #fff8e1;
+    color: #f57c00;
+}
+
+.priorite-4 {
+    background-color: #fff3e0;
+    color: #ef6c00;
+}
+
+.priorite-5 {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+/* Pied de page */
+.tache-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+    margin-top: 12px;
+}
+
+/* Dates */
+.tache-dates {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.date-echeance,
+.date-creation {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #666;
+}
+
+.date-echeance.en-retard {
+    color: #f44336;
+    font-weight: 500;
+}
+
+.date-icon {
+    font-size: 14px;
+}
+
+.retard-badge {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    margin-left: 8px;
+}
+
+/* Actions */
+.tache-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-action {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #666;
+    transition: all 0.3s;
+}
+
+.btn-action:hover {
+    background-color: #f5f5f5;
+    border-color: #999;
+}
+
+.btn-action.btn-supprimer:hover {
+    background-color: #ffebee;
+    border-color: #f44336;
+    color: #f44336;
+}
+
+.btn-icon {
+    font-size: 14px;
+}
+
+.btn-text {
+    display: none;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .btn-text {
+        display: inline;
+    }
+
+    .tache-dates {
+        flex-direction: row;
+        gap: 16px;
+    }
+}

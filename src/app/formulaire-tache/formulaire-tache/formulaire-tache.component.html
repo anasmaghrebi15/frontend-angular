@@ -1,0 +1,96 @@
+<div class="formulaire-tache-card">
+  <h3>{{ tache ? "Modifier la tâche" : "Nouvelle tâche" }}</h3>
+
+  <form [formGroup]="formulaireTache" (ngSubmit)="soumettre()">
+    <div class="form-group">
+      <label for="titre">Titre *</label>
+      <input
+        type="text"
+        id="titre"
+        formControlName="titre"
+        placeholder="Ex: Réunion d'équipe"
+        [class.invalid]="titre?.invalid && titre?.touched"
+      />
+      <div class="error-message" *ngIf="titre?.invalid && titre?.touched">
+        {{ obtenirErreur("titre") }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        placeholder="Description de la tâche..."
+        rows="3"
+        [class.invalid]="description?.invalid && description?.touched"
+      ></textarea>
+      <div
+        class="error-message"
+        *ngIf="description?.invalid && description?.touched"
+      >
+        {{ obtenirErreur("description") }}
+      </div>
+      <div class="char-count" *ngIf="description?.value">
+        {{ description?.value.length }}/500 caractères
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="priorite">Priorité *</label>
+      <select
+        id="priorite"
+        formControlName="priorite"
+        [class.invalid]="priorite?.invalid && priorite?.touched"
+      >
+        <option *ngFor="let option of optionsPriorite" [value]="option.valeur">
+          {{ option.valeur }} - {{ option.libelle }}
+        </option>
+      </select>
+      <div class="error-message" *ngIf="priorite?.invalid && priorite?.touched">
+        {{ obtenirErreur("priorite") }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="dateEcheance">Date d'échéance</label>
+      <input
+        type="date"
+        id="dateEcheance"
+        formControlName="dateEcheance"
+        [min]="dateMinimum"
+        [class.invalid]="dateEcheance?.invalid && dateEcheance?.touched"
+      />
+      <div
+        class="error-message"
+        *ngIf="dateEcheance?.invalid && dateEcheance?.touched"
+      >
+        {{ obtenirErreur("dateEcheance") }}
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button
+        type="button"
+        class="btn btn-outline"
+        (click)="onAnnuler()"
+        [disabled]="chargement"
+      >
+        Annuler
+      </button>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="formulaireTache.invalid || chargement"
+      >
+        <span *ngIf="!chargement">
+          {{ tache ? "Mettre à jour" : "Créer" }}
+        </span>
+        <span *ngIf="chargement">
+          {{ tache ? "Mise à jour..." : "Création..." }}
+        </span>
+      </button>
+    </div>
+  </form>
+</div>

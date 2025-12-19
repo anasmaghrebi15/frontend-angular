@@ -1,0 +1,99 @@
+<div class="taches-container">
+  <div class="taches-header">
+    <h2>Mes Tâches</h2>
+    <div class="header-actions">
+      <button
+        class="btn btn-primary"
+        (click)="startAddTache()"
+        [disabled]="isAddingTache || editingTache"
+      >
+        + Nouvelle Tâche
+      </button>
+
+      <button class="btn btn-outline" (click)="showCompleted = !showCompleted">
+        {{ showCompleted ? "Masquer" : "Afficher" }} les tâches terminées
+      </button>
+
+      <button
+        class="btn btn-logout"
+        (click)="onLogout()"
+        title="Se déconnecter"
+      >
+        <span class="logout-icon">🚪</span>
+        <span class="logout-text">Déconnexion</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="tache-form-container" *ngIf="isAddingTache || editingTache">
+    <app-formulaire-tache
+      [tache]="editingTache || undefined"
+      [chargement]="(loading$ | async) || false"
+      (soumettreFormulaire)="
+        editingTache ? onEditTache($event) : onAddTache($event)
+      "
+      (annuler)="cancelForm()"
+    ></app-formulaire-tache>
+  </div>
+
+  <div class="statistiques">
+    <div class="stat-card">
+      <h3>Total</h3>
+      <p class="stat-value">{{ (taches$ | async)?.length || 0 }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>À faire</h3>
+      <p class="stat-value">{{ (incompleteTaches$ | async)?.length || 0 }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>Terminées</h3>
+      <p class="stat-value">{{ (completedTaches$ | async)?.length || 0 }}</p>
+    </div>
+  </div>
+
+  <div class="taches-list">
+    <div class="tache-section">
+      <h3 class="section-title">
+        À faire ({{ (incompleteTaches$ | async)?.length || 0 }})
+      </h3>
+      <div
+        *ngIf="(incompleteTaches$ | async)?.length === 0"
+        class="empty-state"
+      >
+        <p>Aucune tâche en cours. Ajoutez-en une !</p>
+      </div>
+
+      <div *ngFor="let tache of incompleteTaches$ | async">
+        <app-element-tache
+          [tache]="tache"
+          (modifier)="startEditTache($event)"
+          (supprimer)="onDeleteTache($event)"
+          (basculerTerminee)="onToggleTacheCompletion($event)"
+        ></app-element-tache>
+      </div>
+    </div>
+
+    <div
+      class="tache-section"
+      *ngIf="showCompleted && (completedTaches$ | async)?.length! > 0"
+    >
+      <h3 class="section-title">
+        Terminées ({{ (completedTaches$ | async)?.length || 0 }})
+      </h3>
+
+      <div *ngFor="let tache of completedTaches$ | async">
+        <app-element-tache
+          [tache]="tache"
+          (modifier)="startEditTache($event)"
+          (supprimer)="onDeleteTache($event)"
+          (basculerTerminee)="onToggleTacheCompletion($event)"
+        ></app-element-tache>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="loading$ | async" class="loading-overlay">
+    <div class="spinner"></div>
+    <p>Chargement...</p>
+  </div>
+</div>

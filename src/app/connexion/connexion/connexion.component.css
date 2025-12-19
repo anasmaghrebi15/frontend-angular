@@ -1,0 +1,224 @@
+.connexion-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 200px);
+    padding: 20px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.connexion-card {
+    width: 100%;
+    max-width: 450px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.connexion-header {
+    background: linear-gradient(135deg, #3f51b5 0%, #303f9f 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.connexion-header h1 {
+    margin: 0 0 10px 0;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.connexion-header .sous-titre {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 14px;
+}
+
+.connexion-form {
+    padding: 30px;
+}
+
+.connexion-form h2 {
+    margin: 0 0 25px 0;
+    color: #333;
+    font-size: 24px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #3f51b5;
+    box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.1);
+}
+
+.form-group input.error {
+    border-color: #f44336;
+}
+
+.error-message {
+    color: #f44336;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.error-message.serveur-error {
+    background: #ffebee;
+    border: 1px solid #ffcdd2;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+.form-actions {
+    margin-top: 25px;
+}
+
+.btn-connexion {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #3f51b5 0%, #303f9f 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-connexion:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(63, 81, 181, 0.3);
+}
+
+.btn-connexion:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.chargement {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.info-demo {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.info-demo h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-demo p {
+    margin: 0 0 15px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.emails-demo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.email-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.email-item:hover {
+    transform: translateX(5px);
+    border-color: #3f51b5;
+    background: #f8f9ff;
+}
+
+.email-icon {
+    font-size: 18px;
+}
+
+.email-text {
+    font-family: monospace;
+    font-size: 14px;
+    color: #3f51b5;
+    font-weight: 500;
+}
+
+.note {
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+    text-align: center;
+}
+
+.connexion-footer {
+    padding: 20px;
+    background: #f8f9fa;
+    text-align: center;
+    border-top: 1px solid #e9ecef;
+}
+
+.connexion-footer p {
+    margin: 0;
+    color: #666;
+    font-size: 12px;
+}

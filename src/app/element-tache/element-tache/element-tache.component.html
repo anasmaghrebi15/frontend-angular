@@ -1,0 +1,92 @@
+<div
+  class="tache-element"
+  [class.terminee]="tache.terminee"
+  [class.en-retard]="estEnRetard"
+  [style.background-color]="couleurFondPriorite"
+>
+  <div class="tache-header">
+    <div class="tache-checkbox">
+      <input
+        type="checkbox"
+        [id]="'tache-checkbox-' + tache.id"
+        [checked]="tache.terminee"
+        (change)="onBasculerTerminee()"
+        class="checkbox-input"
+      />
+      <label
+        [for]="'tache-checkbox-' + tache.id"
+        class="checkbox-label"
+        [title]="tache.terminee ? 'Marquer non terminée' : 'Marquer terminée'"
+      >
+        <span class="checkmark"></span>
+      </label>
+    </div>
+
+    <div class="tache-content" (click)="onBasculerTerminee()">
+      <h4 class="tache-titre" [class.barre]="tache.terminee">
+        {{ tache.titre }}
+      </h4>
+      <p class="tache-description" *ngIf="tache.description">
+        {{ tache.description }}
+      </p>
+    </div>
+
+    <div class="tache-priorite">
+      <span class="badge-priorite" [class]="classePriorite">
+        {{ iconePriorite }} {{ tache.priorite }}
+      </span>
+    </div>
+  </div>
+
+  <div class="tache-footer">
+    <div class="tache-dates">
+      <div
+        class="date-echeance"
+        *ngIf="tache.dateEcheance"
+        [class.en-retard]="estEnRetard"
+      >
+        <span class="date-icon">📅</span>
+        <span class="date-text">{{ dateEcheanceFormatee }}</span>
+        <span class="retard-badge" *ngIf="estEnRetard && !tache.terminee"
+          >⚠️ En retard</span
+        >
+      </div>
+
+      <div class="date-creation">
+        <span class="date-icon">📝</span>
+        <span class="date-text">
+          Créée le {{ tache.dateCreation | date : "dd/MM/yyyy" }}
+        </span>
+      </div>
+    </div>
+
+    <div class="tache-actions">
+      <button
+        class="btn-action"
+        [title]="tache.terminee ? 'Marquer non terminée' : 'Marquer terminée'"
+        (click)="onBasculerTerminee()"
+      >
+        <span class="btn-icon">
+          {{ tache.terminee ? "↩️" : "✅" }}
+        </span>
+        <span class="btn-text">
+          {{ tache.terminee ? "Non terminée" : "Terminée" }}
+        </span>
+      </button>
+
+      <button class="btn-action" title="Modifier" (click)="onModifier()">
+        <span class="btn-icon">✏️</span>
+        <span class="btn-text">Modifier</span>
+      </button>
+
+      <button
+        class="btn-action btn-supprimer"
+        title="Supprimer"
+        (click)="onSupprimer()"
+      >
+        <span class="btn-icon">🗑️</span>
+        <span class="btn-text">Supprimer</span>
+      </button>
+    </div>
+  </div>
+</div>

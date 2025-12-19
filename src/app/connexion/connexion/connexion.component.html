@@ -1,0 +1,66 @@
+<div class="connexion-container">
+  <div class="connexion-card">
+    <div class="connexion-logo">
+      <h1>📝</h1>
+      <h2>Gestionnaire de Tâches</h2>
+    </div>
+
+    <div class="connexion-form">
+      <h3>Connexion</h3>
+      <p class="instruction">Saisissez votre email pour accéder à vos tâches</p>
+
+      <form [formGroup]="formulaireConnexion" (ngSubmit)="soumettre()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="votre.email@exemple.com"
+            [class.error]="
+              formulaireConnexion.get('email')?.invalid &&
+              formulaireConnexion.get('email')?.touched
+            "
+          />
+          <div
+            class="error-message"
+            *ngIf="
+              formulaireConnexion.get('email')?.invalid &&
+              formulaireConnexion.get('email')?.touched
+            "
+          >
+            {{ obtenirErreurValidation() }}
+          </div>
+        </div>
+
+        <div
+          class="error-message serveur-error"
+          *ngIf="erreur$ | async as erreur"
+        >
+          {{ erreur }}
+        </div>
+
+        <div class="form-actions">
+          <button
+            type="submit"
+            class="btn btn-connexion"
+            [disabled]="formulaireConnexion.invalid || (chargement$ | async)"
+          >
+            <span *ngIf="!(chargement$ | async)">Se connecter</span>
+            <span *ngIf="chargement$ | async" class="chargement">
+              <span class="spinner"></span>
+              Connexion...
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="connexion-info">
+      <p class="info-text">
+        <strong>Démo :</strong> Utilisez n'importe quel email valide (format:
+        xxx@xxx.xxx)
+      </p>
+    </div>
+  </div>
+</div>
